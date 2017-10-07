@@ -18,7 +18,7 @@
 
 
       <div class="row">
-        <div class="col-xs-4">
+        <div class="col-sm-4">
 
 
           <image-upload buttonCaption="Upload Image" dropBoxMessage="Drag your Image here" clearButtonCaption="Clear" [max]="1" [extensions]="['jpeg','png']"
@@ -30,7 +30,7 @@
 
         </div>
 
-        <div class="col-xs-8">
+        <div class="col-sm-8">
 
           <div class="row">
             <br>
@@ -61,26 +61,14 @@
 
               <!--</form>-->
 
-
-
-              <!--<div class="form-group">
-              <div class="input-group">
-                <input class="form-control" placeholder="Birth Date" name="DOB" [(ngModel)]="BirthDate" ngbDatepicker #birthDate="ngbDatepicker">
-                <div class="input-group-addon" (click)="birthDate.toggle()">
-                  <span class="fa fa-calendar"></span>
-                </div>
-              </div>
-            </div>-->
-           
-
             </div>
 
 
             <div class="col-xs-6">
 
-              <button type="button" (click)="getImage()">Get image</button><br>
+              <!--<button type="button" (click)="getImage()">Get image</button><br>-->
 
-              <img src={{imageURL}}  style="max-height: 200px; max-width: 200px;"  />
+              <img src={{imageURL}} style="max-height: 200px; max-width: 200px;" />
               <!--<img [src]="imageURL">-->
             </div>
 
@@ -95,4 +83,54 @@
     </form>
 
   </div>
+</div>
+
+
+<!--Display records-->
+
+<div class="container">
+  <button type="button" class="btn btn-danger" (click)="getAllData()" data-toggle="collapse" data-target="#demo">Get all Record</button>
+  <div id="demo" class="collapse">
+
+
+
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Birth Date</th>
+            <th>Profile Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of studentAllRecord">
+            <td>{{item.id}}</td>
+            <td><a href="{{item.email}}">{{item.email}}</a> </td>
+            <td>{{item.birthDate| date:'longDate'}}</td>
+            <td> <img src={{item.profileImage}} style="max-height: 50px; max-width: 50px;" /> </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+<div class="container">
+
+  <ul *ngIf="!studentAllRecord">
+    <li *ngFor="let item of studentAllRecord">
+      <a href="{{item.email}}">
+        {{item.email}}
+      </a>
+
+    </li>
+  </ul>
+
 </div>

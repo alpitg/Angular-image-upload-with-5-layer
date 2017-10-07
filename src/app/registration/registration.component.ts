@@ -12,9 +12,11 @@ import { DataService } from "../services/data.service";
 })
 export class RegistrationComponent implements OnInit {
 
-
   //form
   fStudentData: FormGroup;
+
+  //display record
+  studentAllRecord: string[];
 
   //Image File Name
   ImageName: string;
@@ -85,8 +87,15 @@ export class RegistrationComponent implements OnInit {
 
     this.DataService.postStudent(fData.value).subscribe((posts) => {
       console.log(posts);
-      if (posts)
-        window.location.reload();
+
+      if (posts) {
+        // window.location.reload();
+        this.ngOnInit();
+
+        this.imageURL = '';
+      }
+
+
     });
 
   }
@@ -94,13 +103,21 @@ export class RegistrationComponent implements OnInit {
 
 
   getImage() {
-    this.DataService.getStudentById(4).subscribe((post)=>{
+    this.DataService.getStudentById(4).subscribe((post) => {
       console.log(post);
 
 
-    this.imageURL = post.profileImage;
-      console.log( this.imageURL );
+      this.imageURL = post.profileImage;
+      console.log(this.imageURL);
 
+
+    });
+  }
+
+  getAllData() {
+    this.DataService.getAllStudents().subscribe((post) => {
+      this.studentAllRecord = post;
+      console.log(this.studentAllRecord);
 
     });
   }
