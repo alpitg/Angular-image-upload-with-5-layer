@@ -25,12 +25,6 @@ export class RegistrationComponent implements OnInit {
   imageURL: string;
 
 
-
-  //Validation
-  ProfileImage = ['', [Validators.required]];
-  Email = ['', [Validators.required, Validators.email]];
-  BirthDate = ['', Validators.required];
-
   constructor(private DataService: DataService, private formBuilder: FormBuilder) {
   }
 
@@ -39,12 +33,29 @@ export class RegistrationComponent implements OnInit {
     //TODO: Add Student Form
     this.fStudentData = this.formBuilder.group({
 
-      ProfileImage: this.ProfileImage,
-      Email: this.Email,
-      BirthDate: this.BirthDate
+      ProfileImage:  ['', [Validators.required]],
+      Email: ['', [Validators.required, Validators.email]],
+      BirthDate: ['', Validators.required]
 
     });
   }
+
+
+  //validation message       
+  get ProfileImage(){
+    return this.fStudentData.get('ProfileImage');
+  }
+
+  get Email(){
+    return this.fStudentData.get('Email');
+  }
+
+  get BirthDate(){
+    return this.fStudentData.get('BirthDate');
+  }
+
+
+
 
 
   private fileCounter = 0;
